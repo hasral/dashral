@@ -75,7 +75,9 @@ Every component, block and page must look right in every theme the customizer ca
 - Known traps: never compute "today" at module scope in a component or preview (server and browser disagree: hydration
   mismatch); flex children of a surface whose width animates need `shrink-0` or their text wraps mid-animation; a child
   of `AnimatePresence mode="popLayout"` must pass `ref` to its motion element, and refs shared across keyed children
-  get nulled by the leaving one (keep them per key); a veil inside a scrolling area must not be `position: fixed`.
+  get nulled by the leaving one (keep them per key); a veil inside a scrolling area must not be `position: fixed`; a
+  highlight that glides between items by `layoutId` sits in one layer for the whole list (`isolate` on the list, never on
+  each item, or going down it covers the text it leaves and that text blinks), with `layoutCrossfade={false}`.
 
 ## Phones, loading and feel
 

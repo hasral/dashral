@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- Agent skill: `npx skills@latest add hasral/dashral` installs it for the agents you pick, from `skills/dashral/` in the repository (the same files as dashral.com/skills/dashral/, brought up to date at each release)
+
 ## [1.9.0] - 2026-11-17
 
 ### Added

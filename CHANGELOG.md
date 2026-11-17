@@ -5,11 +5,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
-## [1.9.0] - 2026-11-15
+## [1.9.0] - 2026-11-17
+
+### Added
+
+- Motion editions: the odometer has two styles. `odometer="step"` (the new default) moves only the digits that change, each one calm step to its new value; `odometer="roll"` turns them on wheels as before. The prop is on Badge, Button, FunnelChart, NumberInput, Progress and Slider, and `OdometerProvider` (lib/motion-odometer) sets it for everything inside
 
 ### Changed
 
-- No changes to the free kit. This version keeps it in step with Dashral Pro 1.9.0
+- GitHub links point to github.com/hasral, the account's new name (old hasralgana links redirect); create-dashral 0.3.1 clones the free repository from there
+- The Motion editions' numbers step by default instead of rolling on wheels: calmer in a sentence or a row of figures. `odometer="roll"` (or an `OdometerProvider`) brings the wheels back
+- `rounded-2xl`, `rounded-3xl` and `rounded-4xl` scale with the theme radius (`--radius`, set by `data-radius`) like the smaller sizes: the same corners at the default radius, square at 0 and rounder at xl. They used to stay fixed whatever the theme
+- With `data-radius="0"`, `rounded-xl` is square too (it kept 4px before); every other radius gives the same corners as before
+- Pill shapes follow the theme radius: still round at the default radius, square at 0. Prompt Suggestions' chips, Data Table's filter chips, Prompt Composer's send button and Number Input's `pill` style in the kit; in the free blocks, Pill Header (its menu, links, buttons and badges), Report Header's filter chips and live badge, and the badges of Hero Stats, Hero Centered and Workspace Header
+- Pill Header's Get started button is the theme's primary color (it was always ink)
+- The small corners follow the theme radius too: Kbd's keys, the tags of Tag Input, Multi Select and Tree Select, inline code in Note, and `rounded-xs` (2px at the default radius, square at 0). Tailwind's plain `rounded` is a fixed 4px, so the kit and the blocks no longer use it
 
 ## [1.8.0] - 2026-11-14
 
@@ -222,17 +232,17 @@ The first release of Dashral: React components, their motion editions and a Next
 - The dashboard (`apps/demo`): Classic and Inset templates on Next.js 16 with an overview, files, settings, pricing, sign-in and sign-up, error pages, ⌘K search, notifications, a live theme customizer and three languages
 - `pnpm dashral init` sets up your own app from a fresh clone (template, pages, languages, name and look), and `pnpm dashral update` brings in later releases
 
-[Unreleased]: https://github.com/hasralgana/dashral/compare/v1.9.0...HEAD
-[1.9.0]: https://github.com/hasralgana/dashral/compare/v1.8.0...v1.9.0
-[1.8.0]: https://github.com/hasralgana/dashral/compare/v1.7.0...v1.8.0
-[1.7.0]: https://github.com/hasralgana/dashral/compare/v1.6.0...v1.7.0
-[1.6.0]: https://github.com/hasralgana/dashral/compare/v1.5.0...v1.6.0
-[1.5.0]: https://github.com/hasralgana/dashral/compare/v1.4.1...v1.5.0
-[1.4.1]: https://github.com/hasralgana/dashral/compare/v1.4.0...v1.4.1
-[1.4.0]: https://github.com/hasralgana/dashral/compare/v1.3.1...v1.4.0
-[1.3.1]: https://github.com/hasralgana/dashral/compare/v1.3.0...v1.3.1
-[1.3.0]: https://github.com/hasralgana/dashral/compare/v1.2.0...v1.3.0
-[1.2.0]: https://github.com/hasralgana/dashral/compare/v1.1.1...v1.2.0
-[1.1.1]: https://github.com/hasralgana/dashral/compare/v1.1.0...v1.1.1
-[1.1.0]: https://github.com/hasralgana/dashral/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/hasralgana/dashral/releases/tag/v1.0.0
+[Unreleased]: https://github.com/hasral/dashral/compare/v1.9.0...HEAD
+[1.9.0]: https://github.com/hasral/dashral/compare/v1.8.0...v1.9.0
+[1.8.0]: https://github.com/hasral/dashral/compare/v1.7.0...v1.8.0
+[1.7.0]: https://github.com/hasral/dashral/compare/v1.6.0...v1.7.0
+[1.6.0]: https://github.com/hasral/dashral/compare/v1.5.0...v1.6.0
+[1.5.0]: https://github.com/hasral/dashral/compare/v1.4.1...v1.5.0
+[1.4.1]: https://github.com/hasral/dashral/compare/v1.4.0...v1.4.1
+[1.4.0]: https://github.com/hasral/dashral/compare/v1.3.1...v1.4.0
+[1.3.1]: https://github.com/hasral/dashral/compare/v1.3.0...v1.3.1
+[1.3.0]: https://github.com/hasral/dashral/compare/v1.2.0...v1.3.0
+[1.2.0]: https://github.com/hasral/dashral/compare/v1.1.1...v1.2.0
+[1.1.1]: https://github.com/hasral/dashral/compare/v1.1.0...v1.1.1
+[1.1.0]: https://github.com/hasral/dashral/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/hasral/dashral/releases/tag/v1.0.0

@@ -270,6 +270,27 @@ export const defaultMessages = {
   jsonKeys: { one: "{count} key", other: "{count} keys" } as Message,
   jsonItems: { one: "{count} item", other: "{count} items" } as Message,
   showMore: "Show {count} more",
+  // Rich text
+  formatting: "Formatting",
+  textStyle: "Text style",
+  paragraph: "Text",
+  heading: "Heading {level}",
+  bold: "Bold",
+  italic: "Italic",
+  underline: "Underline",
+  strikethrough: "Strikethrough",
+  inlineCode: "Code",
+  bulletList: "Bulleted list",
+  numberedList: "Numbered list",
+  quote: "Quote",
+  undo: "Undo",
+  redo: "Redo",
+  link: "Link",
+  addLink: "Add link",
+  editLink: "Edit link",
+  removeLink: "Remove link",
+  invalidLink: "Enter a full link, such as example.com",
+  characterCount: { one: "{count} character", other: "{count} characters" } as Message,
 }
 
 export type LocaleMessages = typeof defaultMessages

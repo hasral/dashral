@@ -272,5 +272,28 @@
     "one": "{count} item",
     "other": "{count} items"
   },
-  "showMore": "Show {count} more"
+  "showMore": "Show {count} more",
+  "formatting": "Formatting",
+  "textStyle": "Text style",
+  "paragraph": "Text",
+  "heading": "Heading {level}",
+  "bold": "Bold",
+  "italic": "Italic",
+  "underline": "Underline",
+  "strikethrough": "Strikethrough",
+  "inlineCode": "Code",
+  "bulletList": "Bulleted list",
+  "numberedList": "Numbered list",
+  "quote": "Quote",
+  "undo": "Undo",
+  "redo": "Redo",
+  "link": "Link",
+  "addLink": "Add link",
+  "editLink": "Edit link",
+  "removeLink": "Remove link",
+  "invalidLink": "Enter a full link, such as example.com",
+  "characterCount": {
+    "one": "{count} character",
+    "other": "{count} characters"
+  }
 }

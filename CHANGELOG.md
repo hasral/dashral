@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Rich Text Editor (`@dashral/rich-text-editor`): formatted text in one tag, on Tiptap. A toolbar (text style and headings, bold, italic, underline, strikethrough, code, lists, quote, link, undo and redo), the usual shortcuts (⌘B, ⌘K for a link) and markdown as you type (`## `, `- `, `> `). Its value is HTML for forms (`name`, `""` when empty) and it takes a label, hint and error like any field; `maxLength` and `showCount`, `toolbar` to pick the tools, `actions` for controls of your own, `extensions` for more Tiptap extensions
+- Prose: `proseClasses(size)` gives its classes for an element it can't wrap
 - Agent skill: `npx skills@latest add hasral/dashral` installs it for the agents you pick, from `skills/dashral/` in the repository (the same files as dashral.com/skills/dashral/, brought up to date at each release)
 
 ### Security

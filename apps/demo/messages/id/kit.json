@@ -272,5 +272,28 @@
     "one": "{count} item",
     "other": "{count} item"
   },
-  "showMore": "Tampilkan {count} lagi"
+  "showMore": "Tampilkan {count} lagi",
+  "formatting": "Format",
+  "textStyle": "Gaya teks",
+  "paragraph": "Teks",
+  "heading": "Judul {level}",
+  "bold": "Tebal",
+  "italic": "Miring",
+  "underline": "Garis bawah",
+  "strikethrough": "Coret",
+  "inlineCode": "Kode",
+  "bulletList": "Daftar berpoin",
+  "numberedList": "Daftar bernomor",
+  "quote": "Kutipan",
+  "undo": "Urungkan",
+  "redo": "Ulangi",
+  "link": "Tautan",
+  "addLink": "Tambah tautan",
+  "editLink": "Ubah tautan",
+  "removeLink": "Hapus tautan",
+  "invalidLink": "Masukkan tautan lengkap, misalnya example.com",
+  "characterCount": {
+    "one": "{count} karakter",
+    "other": "{count} karakter"
+  }
 }

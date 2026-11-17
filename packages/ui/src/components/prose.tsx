@@ -53,7 +53,12 @@ const sizes = { sm: "text-sm leading-6", default: "text-base leading-7", lg: "te
  * left included. Kit components inside keep their own looks. Give it a width (max-w-prose) for comfortable lines.
  */
 function Prose({ size = "default", as: Component = "div", className, ...props }: ProseProps) {
-  return <Component data-slot="prose" className={cn(base, sizes[size], className)} {...props} />
+  return <Component data-slot="prose" className={proseClasses(size, className)} {...props} />
 }
 
-export { Prose, type ProseProps }
+/** Prose's classes, for an element it can't wrap: the editable area of the Rich Text Editor. */
+function proseClasses(size: ProseProps["size"] = "default", className?: string) {
+  return cn(base, sizes[size], className)
+}
+
+export { Prose, proseClasses, type ProseProps }

@@ -328,5 +328,32 @@
     "many": "{count} عنصرًا",
     "other": "{count} عنصر"
   },
-  "showMore": "عرض {count} أخرى"
+  "showMore": "عرض {count} أخرى",
+  "formatting": "التنسيق",
+  "textStyle": "نمط النص",
+  "paragraph": "نص",
+  "heading": "عنوان {level}",
+  "bold": "غامق",
+  "italic": "مائل",
+  "underline": "تسطير",
+  "strikethrough": "يتوسطه خط",
+  "inlineCode": "رمز برمجي",
+  "bulletList": "قائمة نقطية",
+  "numberedList": "قائمة مرقّمة",
+  "quote": "اقتباس",
+  "undo": "تراجع",
+  "redo": "إعادة",
+  "link": "رابط",
+  "addLink": "إضافة رابط",
+  "editLink": "تعديل الرابط",
+  "removeLink": "إزالة الرابط",
+  "invalidLink": "أدخل رابطًا كاملًا، مثل example.com",
+  "characterCount": {
+    "zero": "لا أحرف",
+    "one": "حرف واحد",
+    "two": "حرفان",
+    "few": "{count} أحرف",
+    "many": "{count} حرفًا",
+    "other": "{count} حرف"
+  }
 }

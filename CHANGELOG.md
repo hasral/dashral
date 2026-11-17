@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Table's Motion edition (`@dashral/motion-table`): rows glide to a new place when the order changes, fade out while the rest close up, and new ones fade in, tinted in the primary color for a moment (`highlightNew`). The same parts as the default edition; give each row a stable key
 - Sheet's Motion edition (`@dashral/motion-sheet`): it slides in on a smooth curve with its content following a moment later, and on a touch screen you drag it back toward its edge to close it (1:1 with your finger, the backdrop clearing; far or fast enough it closes, short of it it glides back). `swipeToClose` turns the drag off
 
 ## [1.10.0] - 2026-11-18

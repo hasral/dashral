@@ -9,6 +9,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Agent skill: `npx skills@latest add hasral/dashral` installs it for the agents you pick, from `skills/dashral/` in the repository (the same files as dashral.com/skills/dashral/, brought up to date at each release)
 
+### Security
+
+- Next.js 16.4.5 in the dashboard: it fixes an information disclosure when a `'use cache'` function is called through `unstable_cache()` (Dashral itself uses neither)
+
 ## [1.9.0] - 2026-11-17
 
 ### Added

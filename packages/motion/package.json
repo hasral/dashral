@@ -6,10 +6,10 @@
   "homepage": "https://dashral.com/docs/installation",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hasralgana/dashral.git",
+    "url": "git+https://github.com/hasral/dashral.git",
     "directory": "packages/motion"
   },
-  "bugs": "https://github.com/hasralgana/dashral/issues",
+  "bugs": "https://github.com/hasral/dashral/issues",
   "keywords": [
     "react",
     "components",

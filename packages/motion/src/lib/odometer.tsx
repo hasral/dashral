@@ -1,7 +1,10 @@
 "use client"
 
-// A number on odometer wheels, as the motion NumberInput and Slider show their values: each digit turns as far as it
-// really travelled, softly blurred while it turns, and the number's width glides as digits come and go.
+// A number whose digits move as it changes, as the motion NumberInput, Slider, Badge and the rest show their values, in
+// one of two styles: "step" (the default) moves only the digits that change, each one step to its new value, calm;
+// "roll" turns each digit on a wheel as far as it really travelled, softly blurred while it turns. Either way the
+// number's width glides as digits come and go. OdometerProvider sets the style for everything inside it; a component's
+// own `odometer` prop wins over it.
 
 import * as React from "react"
 import { AnimatePresence, animate, motion, useMotionValue, useTransform, type MotionValue } from "motion/react"
@@ -10,6 +13,22 @@ import { cn } from "@dashral/ui/lib/utils"
 
 import { useReducedMotion } from "./reduced"
 import { duration, ease, spring } from "./tokens"
+
+/** How the digits move: "step" changes only the digits that change, one calm step each; "roll" turns them on wheels. */
+export type OdometerStyle = "step" | "roll"
+
+const OdometerContext = React.createContext<OdometerStyle>("step")
+
+/** Sets the odometer style for every motion component inside it (a whole app, a page, a card). */
+export function OdometerProvider({ odometer, children }: { odometer: OdometerStyle; children: React.ReactNode }) {
+  return <OdometerContext.Provider value={odometer}>{children}</OdometerContext.Provider>
+}
+
+/** The style to use: the component's own when it has one, else the nearest OdometerProvider's, else "step". */
+export function useOdometerStyle(own?: OdometerStyle) {
+  const inherited = React.useContext(OdometerContext)
+  return own ?? inherited
+}
 
 type Column = { key: string; count: number } | { key: string; text: string }
 
@@ -41,10 +60,23 @@ function columnsOf(value: number, format: Intl.NumberFormat): Column[] {
 
 /**
  * The columns, with the number's width gliding to fit as columns come and go (9 to 10 opens a tens column): a new
- * column rolls in the way the number moved, and one that's no longer needed rolls out.
+ * column comes in the way the number moved, and one that's no longer needed goes out.
  */
-export function Odometer({ value, format, className }: { value: number; format: Intl.NumberFormat; className?: string }) {
+export function Odometer({
+  value,
+  format,
+  odometer,
+  className,
+}: {
+  value: number
+  format: Intl.NumberFormat
+  /** "step" or "roll"; the nearest OdometerProvider's (or "step") when not given. */
+  odometer?: OdometerStyle
+  className?: string
+}) {
   const reduced = useReducedMotion()
+  const style = useOdometerStyle(odometer)
+  const roll = style === "roll"
   const [shown, setShown] = React.useState(value)
   const [rise, setRise] = React.useState(1)
   if (shown !== value) {
@@ -62,16 +94,17 @@ export function Odometer({ value, format, className }: { value: number; format: 
       const next = entry?.borderBoxSize[0]?.inlineSize ?? node.offsetWidth
       if (!next) return
       if (reduced || width.get() === "auto") width.jump(next)
-      else animate(width, next, spring.glide)
+      else animate(width, next, roll ? spring.glide : { duration: duration.considered, ease: ease.standard })
     })
     observer.observe(node)
     return () => observer.disconnect()
-  }, [reduced, width])
+  }, [reduced, roll, width])
 
+  const travel = roll ? 100 : 55
   const slot = {
-    enter: (dir: number) => (reduced ? { opacity: 0 } : { opacity: 0, y: `${dir * 100}%`, filter: "blur(2px)" }),
-    shown: { opacity: 1, y: 0, filter: "blur(0px)" },
-    leave: (dir: number) => (reduced ? { opacity: 0 } : { opacity: 0, y: `${dir * -100}%`, filter: "blur(2px)" }),
+    enter: (dir: number) => (reduced ? { opacity: 0 } : { opacity: 0, y: `${dir * travel}%`, ...(roll && { filter: "blur(2px)" }) }),
+    shown: { opacity: 1, y: 0, ...(roll && { filter: "blur(0px)" }) },
+    leave: (dir: number) => (reduced ? { opacity: 0 } : { opacity: 0, y: `${dir * -travel}%`, ...(roll && { filter: "blur(2px)" }) }),
   }
   return (
     <motion.span className={cn("flex justify-center overflow-hidden", className)} style={{ width }}>
@@ -87,9 +120,17 @@ export function Odometer({ value, format, className }: { value: number; format: 
               initial="enter"
               animate="shown"
               exit="leave"
-              transition={reduced ? { duration: 0 } : { duration: duration.standard, ease: ease.enter }}
+              transition={reduced ? { duration: 0 } : roll ? { duration: duration.standard, ease: ease.enter } : { duration: stepDuration, ease: ease.standard }}
             >
-              {"count" in column ? <Wheel count={column.count} reduced={reduced} /> : column.text}
+              {"count" in column ? (
+                roll ? (
+                  <RollWheel count={column.count} reduced={reduced} />
+                ) : (
+                  <StepWheel count={column.count} rise={rise} reduced={reduced} />
+                )
+              ) : (
+                column.text
+              )}
             </motion.span>
           ))}
         </AnimatePresence>
@@ -99,10 +140,44 @@ export function Odometer({ value, format, className }: { value: number; format: 
 }
 
 /**
+ * One column: only its digit, which steps once to the new one when it changes (the old one leaving the way the number
+ * moved, the new one coming in behind it, in the same cell), however far the number travelled. Calm, never a spin.
+ */
+function StepWheel({ count, rise, reduced }: { count: number; rise: number; reduced: boolean }) {
+  const digit = ((count % 10) + 10) % 10
+  return (
+    <span className="relative inline-grid overflow-hidden">
+      <AnimatePresence initial={false} custom={rise}>
+        <motion.span
+          key={digit}
+          className="col-start-1 row-start-1 text-center"
+          custom={rise}
+          variants={step}
+          initial={reduced ? false : "enter"}
+          animate="shown"
+          exit={reduced ? undefined : "leave"}
+          transition={{ duration: reduced ? 0 : stepDuration, ease: ease.standard }}
+        >
+          {digit}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  )
+}
+
+/** A digit's step: in from a little below (or above, when the number went down), out the other way, fading. */
+const step = {
+  enter: (dir: number) => ({ opacity: 0, y: `${dir * 55}%` }),
+  shown: { opacity: 1, y: 0 },
+  leave: (dir: number) => ({ opacity: 0, y: `${dir * -55}%` }),
+}
+const stepDuration = 0.3
+
+/**
  * One column: the ten digits on a wheel. It turns as many places as its count moved (capped near two turns, so a
  * huge jump still lands quickly), takes longer the farther it goes, and blurs with its speed, sharp again at rest.
  */
-function Wheel({ count, reduced }: { count: number; reduced: boolean }) {
+function RollWheel({ count, reduced }: { count: number; reduced: boolean }) {
   const position = useMotionValue(count)
   // Blur from the wheel's speed as it turns, and none once it rests.
   const filter = useMotionValue("none")

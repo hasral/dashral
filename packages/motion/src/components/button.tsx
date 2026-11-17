@@ -7,7 +7,7 @@ import { buttonVariants } from "@dashral/ui/components/button"
 import { useLocale } from "@dashral/ui/lib/locale"
 import { cn } from "@dashral/ui/lib/utils"
 
-import { Odometer } from "../lib/odometer"
+import { Odometer, type OdometerStyle } from "../lib/odometer"
 import { TextMorph } from "../lib/text-morph"
 import { useReducedMotion } from "../lib/reduced"
 import { duration, ease, spring } from "../lib/tokens"
@@ -32,9 +32,14 @@ export type ButtonProps = NativeProps &
     /**
      * How the hold shows its progress: "fill" sweeps across the button; "radial" grows a circle from where it's
      * pressed; "ring" traces the button's edge; "bar" fills a thin line along its foot; "countdown" turns the label
-     * into the seconds left, on odometer wheels, over a bar.
+     * into the seconds left, on an odometer, over a bar.
      */
     holdStyle?: "fill" | "radial" | "ring" | "bar" | "countdown"
+    /**
+     * How its numbers move: "step" (each digit that changes steps once to its new value, calm) or "roll" (the digits turn
+     * on wheels as far as they travelled). The nearest OdometerProvider's, or "step", when not given.
+     */
+    odometer?: OdometerStyle
     /**
      * A label that's only text morphs into the next one letter by letter (Follow to Following keeps "Follow" and grows
      * "ing") instead of crossing over. Off by default.
@@ -92,6 +97,7 @@ export function Button({
   loadingText,
   holdToConfirm,
   holdStyle = "fill",
+  odometer,
   morph = false,
   children,
   onClick,
@@ -393,7 +399,7 @@ export function Button({
                 exit={{ opacity: 0, transition: { duration: 0.1, ease: ease.exit } }}
                 transition={{ duration: duration.fast, ease: ease.enter }}
               >
-                <Odometer value={left} format={seconds} />
+                <Odometer value={left} format={seconds} odometer={odometer} />
               </motion.span>
             )}
           </AnimatePresence>

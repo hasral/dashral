@@ -100,7 +100,7 @@ function PromptSuggestions({
         onClick={choose}
         disabled={item.disabled}
         className={cn(
-          "inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full border bg-card px-3 text-sm whitespace-nowrap text-muted-foreground shadow-xs transition-[border-color,color,background-color] duration-(--duration-fast) outline-none",
+          "inline-flex h-8 shrink-0 items-center gap-1.5 rounded-[calc(var(--radius)*8/7)] border bg-card px-3 text-sm whitespace-nowrap text-muted-foreground shadow-xs transition-[border-color,color,background-color] duration-(--duration-fast) outline-none",
           "hover:border-ring/40 hover:bg-accent/40 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-3.5 [&_svg]:shrink-0",
           classNames?.item
         )}

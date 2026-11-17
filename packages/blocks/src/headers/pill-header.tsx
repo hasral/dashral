@@ -123,11 +123,11 @@ export function PillHeader({
         </a>
 
         {/* The links, in a pill; the highlight slides to the current one. */}
-        <nav ref={navRef} aria-label="Main" className="relative hidden items-center gap-0.5 rounded-full border bg-muted/60 p-1 lg:flex">
+        <nav ref={navRef} aria-label="Main" className="relative hidden items-center gap-0.5 rounded-[calc(var(--radius)*8/7_+_min(5px,var(--radius)))] border bg-muted/60 p-1 lg:flex">
           {highlight && (
             <span
               aria-hidden
-              className={cn(indicatorMotion, "rounded-full bg-background shadow-xs dark:bg-accent")}
+              className={cn(indicatorMotion, "rounded-[calc(var(--radius)*8/7)] bg-background shadow-xs dark:bg-accent")}
               style={{ translate: `${highlight.x}px ${highlight.y}px`, width: highlight.width, height: highlight.height }}
             />
           )}
@@ -138,12 +138,12 @@ export function PillHeader({
               onClick={go(link)}
               aria-current={current === link.title ? "page" : undefined}
               className={cn(
-                "relative flex h-8 items-center gap-1.5 rounded-full px-3.5 text-[13px] font-medium transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
+                "relative flex h-8 items-center gap-1.5 rounded-[calc(var(--radius)*8/7)] px-3.5 text-[13px] font-medium transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50",
                 current === link.title ? "text-foreground" : "text-muted-foreground"
               )}
             >
               {link.title}
-              {link.badge && <span className="rounded-full border border-primary/25 bg-primary/10 px-1.5 text-[10px] font-semibold text-primary-text">{link.badge}</span>}
+              {link.badge && <span className="rounded-[calc(var(--radius)*4/7)] border border-primary/25 bg-primary/10 px-1.5 text-[10px] font-semibold text-primary-text">{link.badge}</span>}
             </a>
           ))}
         </nav>
@@ -152,7 +152,7 @@ export function PillHeader({
           {github && (
             <a
               href={github.href}
-              className="hidden h-8 items-center rounded-full border bg-card text-[13px] font-medium shadow-xs transition-colors outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring/50 md:inline-flex"
+              className="hidden h-8 items-center rounded-[calc(var(--radius)*8/7)] border bg-card text-[13px] font-medium shadow-xs transition-colors outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring/50 md:inline-flex"
             >
               <span className="flex items-center gap-1.5 px-3">
                 <GitHubMark className="size-3.5" /> Star
@@ -163,11 +163,11 @@ export function PillHeader({
               </span>
             </a>
           )}
-          <Button variant="ghost" size="icon-sm" className="rounded-full" aria-label={dark ? "Switch to light mode" : "Switch to dark mode"} onClick={toggleTheme}>
+          <Button variant="ghost" size="icon-sm" className="rounded-[calc(var(--radius)*8/7)]" aria-label={dark ? "Switch to light mode" : "Switch to dark mode"} onClick={toggleTheme}>
             {dark ? <Sun /> : <Moon />}
           </Button>
-          {signIn && <Action action={signIn} variant="outline" className="hidden rounded-full px-3.5 sm:inline-flex" />}
-          <Action action={cta} className="hidden rounded-full bg-foreground px-3.5 text-background hover:bg-foreground/85 sm:inline-flex">
+          {signIn && <Action action={signIn} variant="outline" className="hidden rounded-[calc(var(--radius)*8/7)] px-3.5 sm:inline-flex" />}
+          <Action action={cta} className="hidden rounded-[calc(var(--radius)*8/7)] px-3.5 sm:inline-flex">
             <ArrowUpRight aria-hidden />
           </Action>
           <Sheet
@@ -177,14 +177,14 @@ export function PillHeader({
             title="Menu"
             className="w-80"
             trigger={
-              <Button variant="ghost" size="icon-sm" className="rounded-full lg:hidden" aria-label="Open the menu">
+              <Button variant="ghost" size="icon-sm" className="rounded-[calc(var(--radius)*8/7)] lg:hidden" aria-label="Open the menu">
                 <Menu />
               </Button>
             }
             footer={
               <div className="grid w-full auto-cols-fr grid-flow-col gap-2">
-                {signIn && <Action action={signIn} variant="outline" className="h-9 rounded-full" then={close} />}
-                <Action action={cta} className="h-9 rounded-full bg-foreground text-background hover:bg-foreground/85" then={close}>
+                {signIn && <Action action={signIn} variant="outline" className="h-9 rounded-[calc(var(--radius)*9/7)]" then={close} />}
+                <Action action={cta} className="h-9 rounded-[calc(var(--radius)*9/7)]" then={close}>
                   <ArrowUpRight aria-hidden />
                 </Action>
               </div>
@@ -200,7 +200,7 @@ export function PillHeader({
                   className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-accent aria-[current=page]:bg-accent"
                 >
                   {link.title}
-                  {link.badge && <span className="rounded-full bg-primary/10 px-1.5 text-[10px] font-semibold text-primary-text">{link.badge}</span>}
+                  {link.badge && <span className="rounded-[calc(var(--radius)*4/7)] bg-primary/10 px-1.5 text-[10px] font-semibold text-primary-text">{link.badge}</span>}
                 </a>
               ))}
             </nav>

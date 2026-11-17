@@ -10,7 +10,7 @@ import { useLocale } from "@dashral/ui/lib/locale"
 import { usePortalContainer } from "@dashral/ui/lib/portal"
 import { cn } from "@dashral/ui/lib/utils"
 
-import { Odometer } from "../lib/odometer"
+import { Odometer, type OdometerStyle } from "../lib/odometer"
 import { motionMessages } from "../lib/field"
 import { useReducedMotion } from "../lib/reduced"
 import { duration, ease, spring } from "../lib/tokens"
@@ -27,6 +27,11 @@ export type NumberInputProps = React.ComponentProps<typeof KitNumberInput> & {
    * ("10 seats") instead of at the far end.
    */
   variant?: "default" | "pill"
+  /**
+   * How its numbers move: "step" (each digit that changes steps once to its new value, calm) or "roll" (the digits turn
+   * on wheels as far as they travelled). The nearest OdometerProvider's, or "step", when not given.
+   */
+  odometer?: OdometerStyle
 }
 
 type FieldKeys = "label" | "description" | "error" | "labelAction" | "withAsterisk"
@@ -63,8 +68,8 @@ const buzz = (pattern: number | number[]) => {
 }
 
 /**
- * The kit's NumberInput with motion: the same props, keys and formatting, and more. Its digits are odometer wheels:
- * each column turns as far as the number really travelled (5 to 50 spins the ones round), blurring with its speed,
+ * The kit's NumberInput with motion: the same props, keys and formatting, and more. Its digits are an odometer: each
+ * one that changes steps to its new value (or, with odometer="roll", turns as far as the number really travelled),
  * and a column that comes or goes opens or closes its width. Hold − or + and it repeats, faster and faster. At a
  * limit the number strains toward it and springs back, harder with each push in a row, the button's icon shakes, the
  * box flashes and "Max 50" rises above it; phones buzz. `scrub` lets you drag the number, `meter` shows where it sits
@@ -96,6 +101,7 @@ function NumberInputControl({ classNames: _classNames, ...controlProps }: Omit<N
     meter = false,
     limitHint = true,
     variant = "default",
+    odometer,
     className,
     disabled,
     onBlur,
@@ -271,7 +277,7 @@ function NumberInputControl({ classNames: _classNames, ...controlProps }: Omit<N
   const pill = variant === "pill"
   const stepButton = cn(
     "flex shrink-0 items-center justify-center text-muted-foreground transition-[color,background-color,opacity] outline-none hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:opacity-40 aria-disabled:opacity-40",
-    pill ? "size-9 rounded-full text-foreground active:bg-accent [&_svg]:size-4" : "h-full w-8 [&_svg]:size-3.5"
+    pill ? "size-9 rounded-[max(0px,calc(var(--radius)*11/7_-_4px))] text-foreground active:bg-accent [&_svg]:size-4" : "h-full w-8 [&_svg]:size-3.5"
   )
   // In a pill the suffix sits beside the number ("10 seats"), so it rides with the wheels.
   const besideNumber = pill && suffix
@@ -318,7 +324,7 @@ function NumberInputControl({ classNames: _classNames, ...controlProps }: Omit<N
         data-disabled={disabled || undefined}
         className={cn(
           "relative flex w-full min-w-0 items-center overflow-hidden border border-input bg-transparent shadow-xs transition-[color,box-shadow,border-color]",
-          pill ? "h-11 gap-1 rounded-full px-1 text-base" : "h-9 rounded-md text-base md:text-sm",
+          pill ? "h-11 gap-1 rounded-[calc(var(--radius)*11/7)] px-1 text-base" : "h-9 rounded-md text-base md:text-sm",
           "focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/15 has-[[aria-invalid=true]]:border-destructive has-[[aria-invalid=true]]:ring-destructive/15",
           "data-limit:border-warning data-limit:ring-2 data-limit:ring-warning/20",
           "data-disabled:cursor-not-allowed data-disabled:opacity-50",
@@ -400,7 +406,7 @@ function NumberInputControl({ classNames: _classNames, ...controlProps }: Omit<N
               )}
             >
               <motion.span className="flex items-baseline" style={{ x: pushX }}>
-                <Odometer value={current ?? 0} format={format} />
+                <Odometer value={current ?? 0} format={format} odometer={odometer} />
                 {besideNumber && <Unit text={suffix} reduced={reduced} />}
               </motion.span>
             </span>

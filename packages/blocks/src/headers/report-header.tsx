@@ -96,7 +96,7 @@ export function ReportHeader({
             <div className="flex items-center gap-3">
               <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
               {live && (
-                <Badge variant="soft" color="success" className="gap-1.5 rounded-full">
+                <Badge variant="soft" color="success" className="gap-1.5 rounded-[calc(var(--radius)*11/14)]">
                   <span aria-hidden className="relative flex size-1.5">
                     <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-60 motion-reduce:animate-none" />
                     <span className="relative inline-flex size-1.5 rounded-full bg-success" />
@@ -158,19 +158,19 @@ export function ReportHeader({
 
         <div className="flex flex-wrap items-center gap-2">
           {filters.map((filter) => (
-            <span key={filter} className="inline-flex h-7 items-center gap-1 rounded-full border bg-card ps-3 pe-1 text-xs">
+            <span key={filter} className="inline-flex h-7 items-center gap-1 rounded-(--radius) border bg-card ps-3 pe-1 text-xs">
               {filter}
               <button
                 type="button"
                 aria-label={`Remove ${filter}`}
                 onClick={() => setFilters(filters.filter((f) => f !== filter))}
-                className="grid size-5 place-items-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+                className="grid size-5 place-items-center rounded-[max(0px,calc(var(--radius)_-_5px))] text-muted-foreground transition-colors outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
               >
                 <X className="size-3" aria-hidden />
               </button>
             </span>
           ))}
-          <Button variant="ghost" size="sm" className="h-7 rounded-full text-xs text-muted-foreground" onClick={onAddFilter}>
+          <Button variant="ghost" size="sm" className="h-7 rounded-(--radius) text-xs text-muted-foreground" onClick={onAddFilter}>
             <Plus aria-hidden /> Add filter
           </Button>
           {compare && <span className="ms-auto hidden text-xs text-muted-foreground sm:inline">Compared with the previous period</span>}

@@ -61,7 +61,7 @@ export function HeroStats({
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             {status && (
-              <Badge variant="soft" color="success" className={cn(enterMotion, "mb-5 gap-1.5 rounded-full")} style={stagger(0, 80)}>
+              <Badge variant="soft" color="success" className={cn(enterMotion, "mb-5 gap-1.5 rounded-[calc(var(--radius)*11/14)]")} style={stagger(0, 80)}>
                 <span aria-hidden className="size-1.5 rounded-full bg-success" /> {status}
               </Badge>
             )}

@@ -100,7 +100,7 @@ export function NotFound({
             prefix={<Search aria-hidden />}
             suffix={
               results.length > 0 && (
-                <kbd className="hidden items-center gap-1 rounded border bg-muted px-1.5 py-0.5 font-sans text-[11px] text-muted-foreground sm:inline-flex">
+                <kbd className="hidden items-center gap-1 rounded-[calc(var(--radius)*2/7)] border bg-muted px-1.5 py-0.5 font-sans text-[11px] text-muted-foreground sm:inline-flex">
                   <CornerDownLeft aria-hidden className="size-3" /> to open
                 </kbd>
               )

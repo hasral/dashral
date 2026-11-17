@@ -44,7 +44,7 @@ function describeKey(key: string, apple: boolean) {
 /** The classes for one key cap. */
 const kbdKeyClass = (size: KbdSize) =>
   cn(
-    "inline-flex min-w-5 items-center justify-center rounded border border-b-2 bg-muted px-1 font-sans font-medium text-muted-foreground",
+    "inline-flex min-w-5 items-center justify-center rounded-[calc(var(--radius)*2/7)] border border-b-2 bg-muted px-1 font-sans font-medium text-muted-foreground",
     size === "sm" ? "h-5 text-[11px]" : "h-6 min-w-6 px-1.5 text-xs"
   )
 

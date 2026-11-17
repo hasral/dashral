@@ -7,13 +7,18 @@ import type { Progress as KitProgress } from "@dashral/ui/components/progress"
 import { useLocale } from "@dashral/ui/lib/locale"
 import { cn } from "@dashral/ui/lib/utils"
 
-import { Odometer } from "../lib/odometer"
+import { Odometer, type OdometerStyle } from "../lib/odometer"
 import { useReducedMotion } from "../lib/reduced"
 import { duration, ease, spring } from "../lib/tokens"
 
 export type ProgressProps = React.ComponentProps<typeof KitProgress> & {
-  /** The percentage at the end of the bar, on odometer wheels. */
+  /** The percentage at the end of the bar, on an odometer. */
   showValue?: boolean
+  /**
+   * How its numbers move: "step" (each digit that changes steps once to its new value, calm) or "roll" (the digits turn
+   * on wheels as far as they travelled). The nearest OdometerProvider's, or "step", when not given.
+   */
+  odometer?: OdometerStyle
 }
 
 type ControlColor = NonNullable<ProgressProps["color"]>
@@ -42,9 +47,9 @@ const barColors: Record<ControlColor, string> = {
  * The kit's Progress with motion: the same value, max, colors and props. The bar glides to each new value on a spring
  * (filling from the start when it first shows), a value of null runs a highlight back and forth for work of unknown
  * length, and reaching the end sends a shine across the bar once. `showValue` puts the percentage at its end, on
- * odometer wheels. With reduced motion the bar moves at once and nothing shines or runs.
+ * an odometer. With reduced motion the bar moves at once and nothing shines or runs.
  */
-export function Progress({ className, classNames, color = "primary", value, max = 100, showValue = false, ...props }: ProgressProps) {
+export function Progress({ className, classNames, color = "primary", value, max = 100, showValue = false, odometer, ...props }: ProgressProps) {
   const reduced = useReducedMotion()
   const { dir, locale } = useLocale()
   const known = value !== null && value !== undefined
@@ -118,7 +123,7 @@ export function Progress({ className, classNames, color = "primary", value, max 
     <div className="flex w-full items-center gap-3">
       {bar}
       <span aria-hidden className="min-w-10 text-end text-xs font-medium text-muted-foreground tabular-nums">
-        {known ? <Odometer value={share} format={percent} className="justify-end" /> : "…"}
+        {known ? <Odometer value={share} format={percent} odometer={odometer} className="justify-end" /> : "…"}
       </span>
     </div>
   )

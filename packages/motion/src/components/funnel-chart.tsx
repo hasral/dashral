@@ -2,15 +2,23 @@
 
 import * as React from "react"
 import { motion } from "motion/react"
-import type { FunnelChartProps } from "@dashral/ui/components/funnel-chart"
+import type { FunnelChartProps as KitFunnelChartProps } from "@dashral/ui/components/funnel-chart"
 import { useLocale } from "@dashral/ui/lib/locale"
 import { cn } from "@dashral/ui/lib/utils"
 
-import { Odometer } from "../lib/odometer"
+import { Odometer, type OdometerStyle } from "../lib/odometer"
 import { useReducedMotion } from "../lib/reduced"
 import { duration, ease, spring } from "../lib/tokens"
 
-export type { FunnelChartProps, FunnelChartDatum } from "@dashral/ui/components/funnel-chart"
+export type { FunnelChartDatum } from "@dashral/ui/components/funnel-chart"
+
+export type FunnelChartProps = KitFunnelChartProps & {
+  /**
+   * How its numbers move: "step" (each digit that changes steps once to its new value, calm) or "roll" (the digits turn
+   * on wheels as far as they travelled). The nearest OdometerProvider's, or "step", when not given.
+   */
+  odometer?: OdometerStyle
+}
 
 /** A bar takes this share of its column; the rest is the flow to the next step. As the kit's FunnelChart has it. */
 const BAR = 0.56
@@ -19,8 +27,8 @@ const RADIUS = 6
 const STEP = 0.06
 
 /**
- * The kit's FunnelChart with motion: the same props and look. When the data changes, every value, share and drop turns
- * on odometer wheels, each digit as far as it travelled, while the bars and the flow between them glide to their new
+ * The kit's FunnelChart with motion: the same props and look. When the data changes, every value, share and drop changes
+ * on an odometer (its digits step or roll, `odometer`), while the bars and the flow between them glide to their new
  * heights. On arrival the bars rise one after another and each value rises into its line with its bar. With reduced
  * motion it's simply there and new data shows at once.
  */
@@ -30,6 +38,7 @@ export function FunnelChart({
   color = "var(--chart-1)",
   percent: percentOf = "first",
   showLost = true,
+  odometer,
   locale: localeProp,
   formatOptions,
   className,
@@ -88,11 +97,11 @@ export function FunnelChart({
                 {/* The value rises into its line with its bar, then turns on wheels when the data changes. */}
                 <span className="-mb-[0.12em] flex justify-center overflow-hidden pb-[0.12em] text-base font-semibold tabular-nums">
                   <motion.span className="flex" animate={{ y: 0 }} {...arrive(i, { y: "110%" })}>
-                    <Odometer value={d.value} format={format} />
+                    <Odometer value={d.value} format={format} odometer={odometer} />
                   </motion.span>
                 </span>
                 <motion.span className="flex justify-center text-xs text-muted-foreground tabular-nums" animate={{ opacity: 1, y: 0 }} {...arrive(i + 1, { opacity: 0, y: 4 })}>
-                  <Odometer value={ratio(value, base)} format={percent} />
+                  <Odometer value={ratio(value, base)} format={percent} odometer={odometer} />
                 </motion.span>
                 {previous !== undefined && (
                   <span className="sr-only">{t("funnelFrom", { rate: percent.format(ratio(value, previous)), from: data[i - 1]!.label, lost: format.format(lost) })}</span>
@@ -130,7 +139,7 @@ export function FunnelChart({
                   >
                     {barTop - lostTop >= 18 && (
                       <span className="flex px-0.5 @max-[3.75rem]:px-0 @max-[3.75rem]:text-[10px]">
-                        −<Odometer value={lost} format={format} />
+                        −<Odometer value={lost} format={format} odometer={odometer} />
                       </span>
                     )}
                   </motion.div>

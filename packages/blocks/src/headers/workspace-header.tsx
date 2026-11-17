@@ -104,7 +104,7 @@ export function WorkspaceHeader({
               <WorkspaceTile name={workspace.name} color={workspace.color} />
               <span className="max-w-32 truncate font-medium sm:max-w-none">{workspace.name}</span>
               {workspace.plan && (
-                <Badge variant="soft" color="neutral" className="hidden rounded-full px-1.5 py-px text-[10px] sm:inline-flex">
+                <Badge variant="soft" color="neutral" className="hidden rounded-[calc(var(--radius)*11/14)] px-1.5 py-px text-[10px] sm:inline-flex">
                   {workspace.plan}
                 </Badge>
               )}

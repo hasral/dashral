@@ -19,7 +19,7 @@ import { argv, exit, platform, stdin, stdout, versions } from "node:process"
 import { createInterface } from "node:readline/promises"
 
 const repos = {
-  free: "https://github.com/hasralgana/dashral.git",
+  free: "https://github.com/hasral/dashral.git",
   pro: "https://github.com/dashral-ui/dashral-pro.git",
 }
 

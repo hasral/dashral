@@ -74,7 +74,7 @@ major (`x.0.0`) is only for a breaking component API change.
 
 ## Questions
 
-Have a question or an idea? Start a thread in [GitHub Discussions](https://github.com/hasralgana/dashral/discussions) — issues are reserved for bugs and concrete feature requests.
+Have a question or an idea? Start a thread in [GitHub Discussions](https://github.com/hasral/dashral/discussions) — issues are reserved for bugs and concrete feature requests.
 
 ## Reporting bugs
 

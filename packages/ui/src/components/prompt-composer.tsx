@@ -322,7 +322,7 @@ function PromptComposerControl({
           <Button
             type="button"
             size="icon-sm"
-            className={cn("rounded-full", classNames?.submit)}
+            className={cn("rounded-[calc(var(--radius)*8/7)]", classNames?.submit)}
             onClick={onStop}
             disabled={!onStop}
             aria-label={t("stopGenerating")}
@@ -330,7 +330,7 @@ function PromptComposerControl({
             <Square aria-hidden className="size-3 fill-current" />
           </Button>
         ) : (
-          <Button type="button" size="icon-sm" className={cn("rounded-full", classNames?.submit)} onClick={send} disabled={!canSend} aria-label={t("sendMessage")}>
+          <Button type="button" size="icon-sm" className={cn("rounded-[calc(var(--radius)*8/7)]", classNames?.submit)} onClick={send} disabled={!canSend} aria-label={t("sendMessage")}>
             <ArrowUp aria-hidden />
           </Button>
         )}

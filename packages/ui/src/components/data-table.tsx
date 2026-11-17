@@ -329,7 +329,7 @@ function DataTableActiveFilters<TData extends RowData>({ table, filters }: { tab
         {chips.map((chip) => (
           <li
             key={`${chip.filter.column}:${chip.value}`}
-            className="inline-flex h-7 shrink-0 animate-in items-center gap-1 rounded-full border bg-card ps-2.5 pe-1 text-[13px] whitespace-nowrap duration-(--duration-fast) ease-enter fade-in-0 zoom-in-95 motion-reduce:animate-none"
+            className="inline-flex h-7 shrink-0 animate-in items-center gap-1 rounded-(--radius) border bg-card ps-2.5 pe-1 text-[13px] whitespace-nowrap duration-(--duration-fast) ease-enter fade-in-0 zoom-in-95 motion-reduce:animate-none"
           >
             <span>
               <span className="text-muted-foreground">{chip.filter.title}</span> {chip.label}
@@ -338,7 +338,7 @@ function DataTableActiveFilters<TData extends RowData>({ table, filters }: { tab
               type="button"
               aria-label={t("remove", { name: `${chip.filter.title}: ${chip.label}` })}
               onClick={chip.remove}
-              className="flex size-5 shrink-0 items-center justify-center rounded-full text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
+              className="flex size-5 shrink-0 items-center justify-center rounded-[max(0px,calc(var(--radius)_-_5px))] text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset"
             >
               <X className="size-3" aria-hidden />
             </button>

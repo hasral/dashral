@@ -27,13 +27,13 @@ const websiteUrl =
 export const dashral = {
   name: "Dashral",
   show: process.env.NEXT_PUBLIC_DASHRAL_LINKS !== "false",
-  author: { name: "Hasral Gana", url: "https://github.com/hasralgana" },
+  author: { name: "Hasral Gana", url: "https://github.com/hasral" },
   links: {
     demo: productionUrl,
     website: websiteUrl,
     components: `${websiteUrl}/components`,
     docs: `${websiteUrl}/docs`,
-    github: "https://github.com/hasralgana/dashral",
+    github: "https://github.com/hasral/dashral",
     // Dashral Pro: plans and the waitlist, on the website.
     pro: `${websiteUrl}/pricing`,
   },

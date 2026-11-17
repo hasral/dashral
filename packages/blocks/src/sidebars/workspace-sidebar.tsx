@@ -196,7 +196,7 @@ export function WorkspaceSidebar({
                 value: w.id,
                 label: w.name,
                 icon: (
-                  <span aria-hidden className={cn("flex size-5 items-center justify-center rounded text-[10px] font-bold", tile(w))}>
+                  <span aria-hidden className={cn("flex size-5 items-center justify-center rounded-[calc(var(--radius)*2/7)] text-[10px] font-bold", tile(w))}>
                     {w.initials ?? w.name[0]}
                   </span>
                 ),

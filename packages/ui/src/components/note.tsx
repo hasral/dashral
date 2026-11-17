@@ -82,7 +82,7 @@ function Note({ title, color = "neutral", icon, className, classNames, children,
             title && "mt-2.5",
             // Links, code and lists read the way they do in the text around it.
             "[&_a]:font-medium [&_a]:text-foreground [&_a]:underline [&_a]:decoration-foreground/30 [&_a]:underline-offset-4 hover:[&_a]:decoration-foreground",
-            "[&_code]:rounded [&_code]:bg-foreground/[0.06] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.92em] [&_code]:text-foreground",
+            "[&_code]:rounded-[calc(var(--radius)*2/7)] [&_code]:bg-foreground/[0.06] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.92em] [&_code]:text-foreground",
             "[&_strong]:font-semibold [&_strong]:text-foreground [&_ul]:list-disc [&_ul]:space-y-1.5 [&_ul]:ps-5 [&_ol]:list-decimal [&_ol]:space-y-1.5 [&_ol]:ps-5",
             classNames?.body
           )}

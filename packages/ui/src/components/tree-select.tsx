@@ -267,7 +267,7 @@ function TreeSelectControl({ treeLabel, items, ...props }: ControlProps & { tree
                   return (
                     <li
                       key={chipId}
-                      className="inline-flex h-6 max-w-48 animate-in items-center gap-0.5 rounded bg-secondary ps-2 pe-0.5 text-xs font-medium text-secondary-foreground duration-(--duration-fast) ease-enter fade-in-0 zoom-in-95 motion-reduce:animate-none"
+                      className="inline-flex h-6 max-w-48 animate-in items-center gap-0.5 rounded-[calc(var(--radius)*2/7)] bg-secondary ps-2 pe-0.5 text-xs font-medium text-secondary-foreground duration-(--duration-fast) ease-enter fade-in-0 zoom-in-95 motion-reduce:animate-none"
                     >
                       <span className="truncate">{label}</span>
                       <button

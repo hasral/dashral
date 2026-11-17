@@ -109,7 +109,7 @@ function TagInputControl({ classNames, ...controlProps }: TagInputControlProps &
         {tags.length > 0 && (
           <ul aria-label={t("tags")} className="contents">
             {tags.map((tag) => (
-              <li key={tag} className="inline-flex h-6 items-center gap-0.5 rounded bg-secondary pe-0.5 ps-2 text-xs font-medium text-secondary-foreground">
+              <li key={tag} className="inline-flex h-6 items-center gap-0.5 rounded-[calc(var(--radius)*2/7)] bg-secondary pe-0.5 ps-2 text-xs font-medium text-secondary-foreground">
                 {tag}
                 <button
                   type="button"

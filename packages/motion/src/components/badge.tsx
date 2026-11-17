@@ -6,7 +6,7 @@ import { badgeVariants, type Badge as KitBadge } from "@dashral/ui/components/ba
 import { useLocale } from "@dashral/ui/lib/locale"
 import { cn } from "@dashral/ui/lib/utils"
 
-import { Odometer } from "../lib/odometer"
+import { Odometer, type OdometerStyle } from "../lib/odometer"
 import { useReducedMotion } from "../lib/reduced"
 import { duration, ease, spring } from "../lib/tokens"
 
@@ -16,6 +16,11 @@ export type { BadgeVariant, BadgeColor } from "@dashral/ui/components/badge"
 export type BadgeProps = Omit<React.ComponentProps<typeof KitBadge>, "asChild" | "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"> & {
   /** With a number for its label: above this it shows "99+" (for max={99}) instead of the number. */
   max?: number
+  /**
+   * How its numbers move: "step" (each digit that changes steps once to its new value, calm) or "roll" (the digits turn
+   * on wheels as far as they travelled). The nearest OdometerProvider's, or "step", when not given.
+   */
+  odometer?: OdometerStyle
 }
 
 // The status dot, in the color's fill (on a solid badge it takes the text color instead), as the kit's Badge has it.
@@ -41,13 +46,13 @@ function amount(key: string | null) {
 }
 
 /**
- * The kit's Badge with motion: the same variants, colors, dot and props. A number turns on odometer wheels, each digit
- * as far as it travelled, and past max it reads "99+"; a new text label crosses over the old one, rolling up for a
+ * The kit's Badge with motion: the same variants, colors, dot and props. A number changes on an odometer (its digits step or roll, `odometer`),
+ * and past max it reads "99+"; a new text label crosses over the old one, rolling up for a
  * bigger number in it and down for a smaller, while the badge glides to the new width; a new color makes the dot
  * pulse. Added inside AnimatePresence, it pops in, and taken away it shrinks out. With reduced motion it only fades.
  * No asChild: for a link that looks like a badge, use the kit's Badge.
  */
-export function Badge({ className, variant, color, dot = false, max, children: label, ...props }: BadgeProps) {
+export function Badge({ className, variant, color, dot = false, max, odometer, children: label, ...props }: BadgeProps) {
   const reduced = useReducedMotion()
   const { locale } = useLocale()
   const format = React.useMemo(() => new Intl.NumberFormat(locale), [locale])
@@ -127,7 +132,7 @@ export function Badge({ className, variant, color, dot = false, max, children: l
         />
       )}
       {count !== null ? (
-        <Odometer value={count} format={format} />
+        <Odometer value={count} format={format} odometer={odometer} />
       ) : key === null ? (
         children
       ) : (

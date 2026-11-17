@@ -8,16 +8,21 @@ import type { SliderProps as KitSliderProps } from "@dashral/ui/components/slide
 import { useLocale } from "@dashral/ui/lib/locale"
 import { cn } from "@dashral/ui/lib/utils"
 
-import { Odometer } from "../lib/odometer"
+import { Odometer, type OdometerStyle } from "../lib/odometer"
 import { motionMessages } from "../lib/field"
 import { useReducedMotion } from "../lib/reduced"
 import { duration, ease, spring } from "../lib/tokens"
 
 export type SliderProps = KitSliderProps & {
-  /** A bubble over the thumb with its value on odometer wheels: while it's dragged or focused ("active"), always, or never. */
+  /** A bubble over the thumb with its value on an odometer: while it's dragged or focused ("active"), always, or never. */
   valueLabel?: "active" | "always" | false
   /** How the bubble writes the value, e.g. `{ style: "currency", currency: "USD" }`. */
   formatOptions?: Intl.NumberFormatOptions
+  /**
+   * How its numbers move: "step" (each digit that changes steps once to its new value, calm) or "roll" (the digits turn
+   * on wheels as far as they travelled). The nearest OdometerProvider's, or "step", when not given.
+   */
+  odometer?: OdometerStyle
 }
 
 type ControlColor = NonNullable<KitSliderProps["color"]>
@@ -45,7 +50,7 @@ const buzz = (pattern: number | number[]) => {
 /**
  * The kit's Slider with motion: the same props, range and colors, and more. Held, the thumb grows; dragged past an
  * end, the track stretches after your finger like a rubber band and snaps back on release; pushed past an end with
- * the keyboard, the thumb strains and springs home. A bubble over the thumb shows the value on odometer wheels and
+ * the keyboard, the thumb strains and springs home. A bubble over the thumb shows the value on an odometer and
  * leans the way you drag, more the faster you go. Phones buzz at the ends (and on each step of a coarse slider).
  * With reduced motion nothing stretches, leans or strains.
  */
@@ -72,6 +77,7 @@ function SliderControl({
   orientation = "horizontal",
   valueLabel = "active",
   formatOptions,
+  odometer,
   ...rest
 }: Omit<SliderProps, keyof FieldOwnProps>) {
   const { "aria-label": ariaLabel, "aria-labelledby": labelledBy, "aria-describedby": describedBy, "aria-invalid": _invalid, ...props } =
@@ -272,7 +278,7 @@ function SliderControl({
                     exit={{ opacity: 0, scale: reduced ? 1 : 0.8, transition: { duration: duration.fast, ease: ease.exit } }}
                     transition={reduced ? { duration: duration.fast } : spring.appear}
                   >
-                    <Odometer value={v} format={format} />
+                    <Odometer value={v} format={format} odometer={odometer} />
                   </motion.span>
                 )}
               </AnimatePresence>

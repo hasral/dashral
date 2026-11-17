@@ -96,7 +96,7 @@ function MultiSelectControl({
           {selected.length > 0 && (
             <ul aria-label={t("selected")} className="flex flex-wrap items-center gap-1">
               {selected.slice(0, maxShown).map((option) => (
-                <li key={option.value} className="inline-flex h-6 items-center gap-0.5 rounded bg-secondary pe-0.5 ps-2 text-xs font-medium text-secondary-foreground">
+                <li key={option.value} className="inline-flex h-6 items-center gap-0.5 rounded-[calc(var(--radius)*2/7)] bg-secondary pe-0.5 ps-2 text-xs font-medium text-secondary-foreground">
                   {option.label}
                   <button
                     type="button"

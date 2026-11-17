@@ -66,7 +66,7 @@ export function HeroCentered({
             className={cn(enterMotion, "mb-7 inline-flex items-center gap-2 rounded-full border bg-card/70 py-1 ps-1 pe-3 text-xs text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground")}
             style={stagger(0, 80)}
           >
-            <Badge className="rounded-full">{announcement.label}</Badge>
+            <Badge className="rounded-[calc(var(--radius)*11/14)]">{announcement.label}</Badge>
             {announcement.text}
             <ArrowRight className="size-3" aria-hidden />
           </a>

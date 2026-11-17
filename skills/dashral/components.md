@@ -504,6 +504,12 @@ Use: A score in stars: a review, feedback after a support chat.
 Not for: Showing an average, read only: Rating with readOnly, or the number with a star icon.
 Docs: http://localhost:3001/components/rating.md
 
+### Rich Text Editor (`@dashral/rich-text-editor`)
+Formatted text with a toolbar, keyboard shortcuts and markdown as you type; its value is HTML for forms.
+Use: Formatted text people write: a description, release notes, a reply with lists and links. In a form: its value is HTML, sent under name, with a label, hint and error like any field.
+Not for: Plain text, even long: Textarea (lighter, no HTML to store). A chat message to an assistant: Prompt Composer. Showing HTML you already have: Prose.
+Docs: http://localhost:3001/components/rich-text-editor.md
+
 ### Segmented Control (`@dashral/segmented-control`)
 A row of options where one is picked, like a view switcher. The highlight slides to the choice.
 Use: Switching how the same thing is shown: day, week or month; list or grid; a chart's period.

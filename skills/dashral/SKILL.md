@@ -5,7 +5,7 @@ description: Build React and Next.js interfaces with Dashral, the component, blo
 
 # Dashral
 
-Dashral is a React 19 kit on Tailwind CSS v4 and Radix UI: 119 accessible components (with Motion editions on motion/react), blocks for whole sections of a page, and admin dashboard templates. Components are free and MIT licensed; Pro adds dashboards, apps and more blocks.
+Dashral is a React 19 kit on Tailwind CSS v4 and Radix UI: 120 accessible components (with Motion editions on motion/react), blocks for whole sections of a page, and admin dashboard templates. Components are free and MIT licensed; Pro adds dashboards, apps and more blocks.
 
 ## Workflow
 

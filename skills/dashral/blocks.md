@@ -1,50 +1,50 @@
-# Blocks
+# Blocks and screens
 
-Whole sections of a page built from the components, each taking your own data as props. Free blocks install with the shadcn CLI; Pro blocks come with Dashral Pro.
+Built from the components, each taking your own data as props: blocks are sections of a page (a header, pricing, sign-in), screens are whole pages inside an app (an AI assistant, a kanban board, billing). Both install the same way: free ones with the shadcn CLI, Pro ones with Dashral Pro.
 
-## AI
+## AI (screens)
 
 ### AI assistant (`@dashral/ai-assistant`)
 A whole assistant screen: starter cards, reasoning, tool calls, an approval before it emails anyone, and a streamed answer, with past conversations beside it.
 Use: A whole assistant screen inside your product: past conversations, starter prompts, reasoning, tool calls and a streamed answer. Copilots and support assistants that act on the user's data and ask before they do anything that can't be undone.
 Not for: A quick question beside other work: Prompt Composer and Conversation in a side panel are lighter than a whole screen. Answers that only look things up: a search or the Help center finds them faster than a chat.
-Docs: http://localhost:3001/blocks/ai-assistant.md
+Docs: http://localhost:3001/screens/ai-assistant.md
 
 ### Prompt playground (Dashral Pro)
 One question answered side by side by two or three set-ups (a model and a temperature each), streaming at once with their latency, tokens and cost turning as they go; rate them and pick the winner. Variables in the prompt get fields of their own. On motion.
 Use: Comparing set-ups for one prompt: models, temperatures, wording, on the same question, before you ship one. AI products where a team tunes prompts and needs to see quality, speed and cost side by side.
 Not for: A conversation with the assistant: AI assistant or Agent workspace. Evaluating hundreds of cases at once: a Data Table of runs fits better.
-Docs: http://localhost:3001/blocks/prompt-playground.md
+Docs: http://localhost:3001/screens/prompt-playground.md
 
 ### Knowledge sources (Dashral Pro)
 What your AI assistant reads before it answers: files, websites and connected apps, each indexing live with its chunks counting up, a source opened with its chunks, and a retrieval test that shows what a question would find. Drop files on it to add them. On motion.
 Use: The screen where a team manages what its AI assistant knows: files, websites and connected apps, and how far each is indexed. Products with retrieval (RAG), where people add sources, fix one that failed and check what a question would find.
 Not for: Plain file storage with nothing indexed: a file list or Data Table fits better. One upload in a form: File Dropzone on its own.
-Docs: http://localhost:3001/blocks/knowledge-sources.md
+Docs: http://localhost:3001/screens/knowledge-sources.md
 
 ### AI usage & limits (Dashral Pro)
 What your product's AI costs this month: the spend against its budget and where it's heading, every day by model, and each API key against its limit. Edit the budget and its line glides to show what it means; a key at its limit pauses, an alert rises as the spend passes its mark. Live, on motion.
 Use: The page where a team sees what its AI costs this month: the spend against a budget, where it's heading, by model and by API key. AI products that bill by usage and need limits people can set: a monthly budget that alerts or pauses, and a limit per key.
 Not for: One run's cost: Agent run viewer shows the tokens and cost of each step. A customer's plan, card and invoices: Billing settings.
-Docs: http://localhost:3001/blocks/ai-usage.md
+Docs: http://localhost:3001/screens/ai-usage.md
 
 ### Agent workspace (Dashral Pro)
 A chat with an AI agent beside what it's making, a document, a table or code, in versions: ask for a change and the new version writes itself line by line, see what changed, or bring an older one back. On motion.
 Use: An agent that makes something people keep working on: a brief, a report, a table of numbers, a piece of code. Products where people ask for changes in words and want to compare versions or go back to one.
 Not for: Questions with a quick answer and nothing to keep: AI assistant. Editing the document by hand: pair the panel with your own editor instead of this view.
-Docs: http://localhost:3001/blocks/agent-workspace.md
+Docs: http://localhost:3001/screens/agent-workspace.md
 
 ### Agent run viewer (Dashral Pro)
 One run of an AI agent, step by step: every model call, tool call and approval on a timeline, with what went in and what came out, the time, tokens and cost. It waits for you where it should, with the files it would change to review, and retries from the step that failed. Live, on motion.
 Use: Seeing what an AI agent did on one task: each model call, tool call and approval, what went in and came out, the time and the cost. Agent products where people need to trust a result, find why a run failed, and run it again from the step that broke.
 Not for: The answer itself in a conversation: Tool Activity and Reasoning show the steps inline, under the message. Many runs side by side: a Data Table of runs, each opening this.
-Docs: http://localhost:3001/blocks/agent-run-viewer.md
+Docs: http://localhost:3001/screens/agent-run-viewer.md
 
 ### Approval inbox (Dashral Pro)
 Everything your AI agents are waiting on you for, each with its risk: the one in focus open with exactly what it will do, approve or deny it from the keyboard (J/K, A, D) or several at once, and always allow a tool for an agent, for its details or for an hour. Decided rows fold away and the next opens, on motion.
 Use: One place for everything your AI agents are waiting on a person for, across agents and tools. Products where agents act on real things (emails, refunds, records) and someone answers for what they do.
 Not for: One request inside a conversation: Approval Card asks right where the assistant is working. Requests from people rather than agents (access, invites): Notifications center.
-Docs: http://localhost:3001/blocks/approval-inbox.md
+Docs: http://localhost:3001/screens/approval-inbox.md
 
 ## Headers
 
@@ -136,89 +136,91 @@ Use: Steps to a working setup, with progress and time left; the next step unfold
 Not for: Setup that has to be done before the product works at all: Onboarding walks through it first. Accounts past their first days: hide it once every step is done.
 Docs: http://localhost:3001/blocks/onboarding-checklist.md
 
-### Analytics overview (Dashral Pro)
-A whole analytics page: who's online, numbers that pick what the chart shows, the period before, and pages, sources and countries.
-Use: A whole analytics page: who's online, numbers that pick what the chart shows, the period before, and top lists. Product and marketing analytics with a few headline metrics and a 7, 30 or 90 day range.
-Not for: Ops and infrastructure metrics across many small panels: Analytics panels. One or two numbers on a home page: Stats cards.
-Docs: http://localhost:3001/blocks/analytics-overview.md
-
-### Analytics panels (Dashral Pro)
-An analytics overview on inset cards: traffic you switch by metric with a line that follows the pointer, cache, countries, status codes, threats and top paths, all moving with the range.
-Use: An analytics overview on inset cards: traffic by metric, cache, countries, statuses, threats and top paths. Infrastructure and edge dashboards; ops views with many small panels.
-Not for: Product or marketing analytics led by one chart: Analytics overview. Pages for readers who aren't technical: many small panels read as noise.
-Docs: http://localhost:3001/blocks/analytics-panels.md
-
-## App screens
+## Work (screens)
 
 ### Kanban board (Dashral Pro)
 Drag cards between columns with a line where they land, work-in-progress limits, a filter by person and quick add.
 Use: Cards in columns you drag between, with work-in-progress limits, a filter by person and quick add. Task boards, sales pipelines, hiring and content calendars.
 Not for: Long lists people sort and filter more than they move: Orders table or a Data Table. Work with more than six or so stages: the columns stop fitting; a table with a status filter.
-Docs: http://localhost:3001/blocks/kanban-board.md
+Docs: http://localhost:3001/screens/kanban-board.md
 
 ### Inbox (Dashral Pro)
 Conversations beside the open one: search, unread and archived, pin or mute; write with an emoji or a file and see when it's read.
 Use: Conversations beside the open one: search, unread and archived, pin, mute, reactions and files. Support inboxes, marketplaces' buyer–seller messages and in-app chat.
 Not for: Notifications that ask for an action rather than a reply: Notifications. Support conversations with assignment, SLAs and macros: a help desk tool does more than a chat.
-Docs: http://localhost:3001/blocks/inbox.md
+Docs: http://localhost:3001/screens/inbox.md
 
 ### Notifications (Dashral Pro)
 Notifications by day, filtered by unread or type, each with its action right there: approve, accept, retry or reply; undo a dismissal and pick what's emailed.
 Use: Notifications by day, filtered by unread or type, each with its action right there. Apps where notifications ask for something: approve, accept, retry.
 Not for: Messages people reply to: Inbox. A brief confirmation of what just happened: a Toast.
-Docs: http://localhost:3001/blocks/notifications-center.md
+Docs: http://localhost:3001/screens/notifications-center.md
 
 ### Data grid (Dashral Pro)
 Orders as a grid: saved views with their counts, filters as chips, columns to sort by and to show or hide, rows grouped by status with their subtotals, cells edited in place, density, and an action bar that rises for the rows picked. On motion.
 Use: The main list of an admin or back office: orders, customers or tickets people sort, filter and change all day. Lists where people act on many rows at once: change their status, export them or delete them.
 Not for: A short list on a dashboard: a plain table or the free Orders table is lighter. Thousands of rows at once: page or virtualise them on your server and pass in what's shown.
-Docs: http://localhost:3001/blocks/data-grid.md
+Docs: http://localhost:3001/screens/data-grid.md
 
 ### Team members (Dashral Pro)
 The team and the invitations still out: invite several people with a role, change roles in place, suspend or remove someone, and resend or revoke an invite.
 Use: The team and its invitations: invite several people with a role, change roles, suspend or remove. Any product with seats: workspace settings, admin consoles.
 Not for: Single-user products. Managing customers rather than teammates: Orders table or a Data Table.
-Docs: http://localhost:3001/blocks/team-members.md
+Docs: http://localhost:3001/screens/team-members.md
 
-## Billing
+## Analytics (screens)
+
+### Analytics overview (Dashral Pro)
+A whole analytics page: who's online, numbers that pick what the chart shows, the period before, and pages, sources and countries.
+Use: A whole analytics page: who's online, numbers that pick what the chart shows, the period before, and top lists. Product and marketing analytics with a few headline metrics and a 7, 30 or 90 day range.
+Not for: Ops and infrastructure metrics across many small panels: Analytics panels. One or two numbers on a home page: Stats cards.
+Docs: http://localhost:3001/screens/analytics-overview.md
+
+### Analytics panels (Dashral Pro)
+An analytics overview on inset cards: traffic you switch by metric with a line that follows the pointer, cache, countries, status codes, threats and top paths, all moving with the range.
+Use: An analytics overview on inset cards: traffic by metric, cache, countries, statuses, threats and top paths. Infrastructure and edge dashboards; ops views with many small panels.
+Not for: Product or marketing analytics led by one chart: Analytics overview. Pages for readers who aren't technical: many small panels read as noise.
+Docs: http://localhost:3001/screens/analytics-panels.md
+
+## Billing (screens)
 
 ### Billing overview (Dashral Pro)
 A workspace's billing at a glance: the plan and its price monthly or yearly, the card on file as a card you can tilt, usage near its limits, and invoices as lines of what they were for. A failed payment raises a banner with Pay now. On motion.
 Use: A workspace's billing page at a glance: the plan and its price, the card on file, usage near its limits and the invoices, with a way to pay one that failed. Subscription products with a few plans and add-ons, where people mostly check what they pay, upgrade and settle a failed payment.
 Not for: Usage-based pricing that needs the spend, where it's heading and alerts: Billing settings. One invoice in full, to send or record a payment: Invoice detail.
-Docs: http://localhost:3001/blocks/billing-overview.md
+Docs: http://localhost:3001/screens/billing-overview.md
 
 ### Billing settings (Dashral Pro)
 The plan with dialogs to change or cancel it, what this period costs so far and where it's heading against the budget and alerts, usage with what going past each limit costs, spend alerts by email or Slack, the card on file and invoices. On motion.
 Use: The billing page of a subscription product: the plan with dialogs to change or cancel it, what this period costs so far and where it's heading, usage against the plan's limits, spend alerts, the card on file and invoices. Usage-based pricing, where people need to see a bill coming before it arrives and decide whether to upgrade.
 Not for: One-time purchases without a subscription: an order history fits better. Picking a plan for the first time: Pricing tiers. What an AI feature costs by model and API key: AI usage & limits.
-Docs: http://localhost:3001/blocks/billing-settings.md
+Docs: http://localhost:3001/screens/billing-settings.md
 
 ### Invoice (Dashral Pro)
 The invoice beside its history: send it, record a payment in full or in part, mark it paid or void it, and print it.
 Use: An invoice beside its history: send it, record a payment in full or in part, void it, print it. Invoicing, accounting and agency tools that bill clients.
 Not for: Subscriptions billed automatically: Billing settings lists their invoices. Receipts for one-time purchases: an order's detail is enough.
-Docs: http://localhost:3001/blocks/invoice-detail.md
+Docs: http://localhost:3001/screens/invoice-detail.md
 
-## Settings
+## Settings (screens)
 
 ### Profile settings (`@dashral/profile-settings`)
 A profile form with a photo cropped as it's picked, beside a card that shows how the profile looks to others as you type.
 Use: The profile page of an account: a photo cropped as it's picked, name, username, bio, website and place, beside a card that shows how it looks to others. Any product where people have a public page or show up to their team: a community, a marketplace, a SaaS workspace.
 Not for: The workspace's own logo and colour, not a person's: Workspace branding. Only a photo to change, inside a form you already have: Avatar Upload on its own.
-Docs: http://localhost:3001/blocks/profile-settings.md
+Docs: http://localhost:3001/screens/profile-settings.md
 
 ### Developer settings (Dashral Pro)
 API keys for live and test, a new key's secret shown once as its characters settle, revoking behind a hold, and webhooks: each endpoint with its recent deliveries, events and signing secret, a test event that lands in the log, deliveries opened with their payload and retried in place. On motion.
 Use: The developer page of a product with an API: keys for live and test, and webhooks with their deliveries. Products where customers build on you and need to make keys, test their endpoints and see why a delivery failed.
 Not for: Personal access tokens in a profile: a short list in Profile settings is enough. Watching API traffic over time: a dashboard with charts fits better.
-Docs: http://localhost:3001/blocks/developer-settings.md
+Docs: http://localhost:3001/screens/developer-settings.md
 
 ### Workspace branding (Dashral Pro)
 The workspace's name, logo, cover and colour, previewed live in the sidebar, the sign-in page, emails and invoices.
 Use: A workspace's brand in one place: its name, a square logo and a wide cover (each cropped as it's picked) and its colour, previewed in the sidebar, the sign-in page, emails and invoices as you edit. White-label and multi-tenant products, where each customer's team sees its own brand.
 Not for: A person's profile: Profile settings. The whole theme (fonts, radius, every colour): the theme customizer is made for that.
-Docs: http://localhost:3001/blocks/workspace-branding.md
+Docs: http://localhost:3001/screens/workspace-branding.md
 
 ## Heroes
 

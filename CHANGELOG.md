@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Avatar's Motion edition (`@dashral/motion-avatar`): a new picture crosses over the old once it has loaded, a change of status pops the dot with one ripple (`pulse` keeps a gentle one going), and AvatarGroup spreads apart on hover and makes room as people join or leave
 - Combobox's Motion edition (`@dashral/motion-combobox`): its list is the Motion edition's Command (one highlight gliding, the height following the search), the picked option's tick draws itself, and a new value rises into the field
 - Command's Motion edition (`@dashral/motion-command`): one highlight glides from item to item after the arrow keys or the pointer, the list's height follows what matches as you type, and CommandDialog grows out of its button on the Motion edition's Dialog. `@dashral/motion` now depends on `cmdk` (the version `@dashral/ui` already uses)
 - Table's Motion edition (`@dashral/motion-table`): rows glide to a new place when the order changes, fade out while the rest close up, and new ones fade in, tinted in the primary color for a moment (`highlightNew`). The same parts as the default edition; give each row a stable key

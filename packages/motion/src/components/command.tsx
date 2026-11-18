@@ -39,8 +39,18 @@ function CommandInput({ className, ...props }: React.ComponentProps<typeof Comma
   )
 }
 
-/** The list: its height glides to fit what matches as you type (cmdk measures it into --cmdk-list-height). */
-function CommandList({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.List>) {
+/**
+ * The list: its height glides to fit what matches as you type (cmdk measures it into --cmdk-list-height). It's also
+ * where the highlight lives (one per list) and where items know the list has just opened.
+ */
+function CommandList({ className, children, ...props }: React.ComponentProps<typeof CommandPrimitive.List>) {
+  // The first moment after the list shows: items there rise in; later ones (the search loosening) only fade.
+  const opening = React.useRef(true)
+  React.useEffect(() => {
+    const timer = setTimeout(() => (opening.current = false), 400)
+    return () => clearTimeout(timer)
+  }, [])
+  const group = React.useId()
   return (
     <CommandPrimitive.List
       data-slot="command-list"
@@ -52,7 +62,11 @@ function CommandList({ className, ...props }: React.ComponentProps<typeof Comman
         className
       )}
       {...props}
-    />
+    >
+      <OpeningContext value={opening}>
+        <LayoutGroup id={group}>{children}</LayoutGroup>
+      </OpeningContext>
+    </CommandPrimitive.List>
   )
 }
 
@@ -115,43 +129,34 @@ function CommandItem({ className, children, ...props }: React.ComponentProps<typ
 }
 
 function CommandBody({ groups, placeholder, emptyText }: Pick<CommandProps, "groups" | "placeholder" | "emptyText">) {
-  // The first moment after the list opens: items there rise in; later ones (the search loosening) only fade.
-  const opening = React.useRef(true)
-  React.useEffect(() => {
-    const timer = setTimeout(() => (opening.current = false), 400)
-    return () => clearTimeout(timer)
-  }, [])
-  const group = React.useId()
   return (
-    <OpeningContext value={opening}>
-      <LayoutGroup id={group}>
-        <CommandInput placeholder={placeholder} />
-        <CommandList>
-          <CommandEmpty>{emptyText}</CommandEmpty>
-          {groups.map((section, g) => (
-            <React.Fragment key={g}>
-              {g > 0 && !section.heading && <CommandSeparator />}
-              {/* Not clipped, so the highlight crossing from one group to the next isn't cut at the edge. */}
-              <CommandGroup heading={section.heading} className="overflow-visible">
-                {section.items.map((item, i) => (
-                  <CommandItem
-                    key={i}
-                    value={item.value ?? (typeof item.label === "string" ? item.label : undefined)}
-                    keywords={item.keywords}
-                    disabled={item.disabled}
-                    onSelect={item.onSelect}
-                  >
-                    {item.icon}
-                    {item.label}
-                    {item.badge ? <span className="ms-auto">{item.badge}</span> : item.shortcut ? <CommandShortcut>{item.shortcut}</CommandShortcut> : null}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </React.Fragment>
-          ))}
-        </CommandList>
-      </LayoutGroup>
-    </OpeningContext>
+    <>
+      <CommandInput placeholder={placeholder} />
+      <CommandList>
+        <CommandEmpty>{emptyText}</CommandEmpty>
+        {groups.map((section, g) => (
+          <React.Fragment key={g}>
+            {g > 0 && !section.heading && <CommandSeparator />}
+            {/* Not clipped, so the highlight crossing from one group to the next isn't cut at the edge. */}
+            <CommandGroup heading={section.heading} className="overflow-visible">
+              {section.items.map((item, i) => (
+                <CommandItem
+                  key={i}
+                  value={item.value ?? (typeof item.label === "string" ? item.label : undefined)}
+                  keywords={item.keywords}
+                  disabled={item.disabled}
+                  onSelect={item.onSelect}
+                >
+                  {item.icon}
+                  {item.label}
+                  {item.badge ? <span className="ms-auto">{item.badge}</span> : item.shortcut ? <CommandShortcut>{item.shortcut}</CommandShortcut> : null}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </React.Fragment>
+        ))}
+      </CommandList>
+    </>
   )
 }
 

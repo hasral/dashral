@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.11.0] - 2026-11-18
+
 ### Added
 
 - Avatar's Motion edition (`@dashral/motion-avatar`): a new picture crosses over the old once it has loaded, a change of status pops the dot with one ripple (`pulse` keeps a gentle one going), and AvatarGroup spreads apart on hover and makes room as people join or leave
@@ -252,7 +254,8 @@ The first release of Dashral: React components, their motion editions and a Next
 - The dashboard (`apps/demo`): Classic and Inset templates on Next.js 16 with an overview, files, settings, pricing, sign-in and sign-up, error pages, ⌘K search, notifications, a live theme customizer and three languages
 - `pnpm dashral init` sets up your own app from a fresh clone (template, pages, languages, name and look), and `pnpm dashral update` brings in later releases
 
-[Unreleased]: https://github.com/hasral/dashral/compare/v1.10.0...HEAD
+[Unreleased]: https://github.com/hasral/dashral/compare/v1.11.0...HEAD
+[1.11.0]: https://github.com/hasral/dashral/compare/v1.10.0...v1.11.0
 [1.10.0]: https://github.com/hasral/dashral/compare/v1.9.0...v1.10.0
 [1.9.0]: https://github.com/hasral/dashral/compare/v1.8.0...v1.9.0
 [1.8.0]: https://github.com/hasral/dashral/compare/v1.7.0...v1.8.0

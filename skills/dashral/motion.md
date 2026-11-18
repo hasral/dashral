@@ -16,7 +16,7 @@ In Tailwind: `duration-(--duration-standard) ease-standard`.
 
 ## Motion editions
 
-31 components have a Motion edition on motion/react, with the same props: swap the import to `@/components/dashral/motion/<slug>` (registry: `@dashral/motion-<slug>`). They do what CSS can't: springs, heights that glide, numbers on odometer wheels, drags and holds.
+36 components have a Motion edition on motion/react, with the same props: swap the import to `@/components/dashral/motion/<slug>` (registry: `@dashral/motion-<slug>`). They do what CSS can't: springs, heights that glide, numbers on odometer wheels, drags and holds.
 
 For your own animated pieces, use the kit's motion components instead of motion.div: **Reveal** (content that appears and disappears with its height, RevealList for rows), **Swap** (content that changes in place), **Glide** (things that move to a new place or size).
 
